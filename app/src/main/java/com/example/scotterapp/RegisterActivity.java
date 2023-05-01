@@ -17,6 +17,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.ktx.Firebase;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -31,6 +33,9 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegister;
     FirebaseAuth mAuth;
 
+    FirebaseDatabase usersdb;
+    DatabaseReference myRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +48,10 @@ public class RegisterActivity extends AppCompatActivity {
         etRegPassword = findViewById(R.id.etRegPass);
         tvLoginHere = findViewById(R.id.tvLoginHere);
         btnRegister = findViewById(R.id.btnRegister);
-
-
         mAuth = FirebaseAuth.getInstance();
 
+        usersdb = FirebaseDatabase.getInstance();
+        myRef = usersdb.getReference();
 
 
 
@@ -57,6 +62,8 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
