@@ -36,6 +36,16 @@ public class LoginActivity extends AppCompatActivity {
         btnLogIn = findViewById(R.id.btnLogin);
         mAuth = FirebaseAuth.getInstance();
 
+
+        tvRegisterHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,9 +62,9 @@ public class LoginActivity extends AppCompatActivity {
 //                                    if(user != null)
 //                                        Toast.makeText(LoginActivity.this,"User Is Logged In",Toast.LENGTH_SHORT).show();
 
-                                    User user = new User(etLogInEmail.getText().toString(), etLogInPassword.getText().toString());
+                                    //User user = new User(etLogInEmail.getText().toString(), etLogInPassword.getText().toString());
                                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                    intent.putExtra("user", user);
+                                    //intent.putExtra("user", user);
                                     startActivity(intent);
                                     finish();
                                 }

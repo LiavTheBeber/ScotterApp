@@ -1,6 +1,7 @@
 package com.example.scotterapp;
 
 import android.content.Intent;
+import android.database.DatabaseUtils;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,25 +17,47 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.ktx.Firebase;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    TextInputEditText etRegFullName;
+
+    TextInputEditText etRegMobile;
+
     TextInputEditText etRegEmail;
     TextInputEditText etRegPassword;
     TextView tvLoginHere;
     Button btnRegister;
     FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        etRegFullName = findViewById(R.id.etRegFullName);
+        etRegMobile = findViewById(R.id.etRegMobile);
         etRegEmail = findViewById(R.id.etRegEmail);
         etRegPassword = findViewById(R.id.etRegPass);
         tvLoginHere = findViewById(R.id.tvLoginHere);
         btnRegister = findViewById(R.id.btnRegister);
 
+
         mAuth = FirebaseAuth.getInstance();
+
+
+
+
+        tvLoginHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,18 +68,21 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task)
                             {
-                                if(task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
+                                if (!(etRegFullName.getText().toString().isEmpty() && etRegMobile.getText().toString().isEmpty()))
+                                {
+                                    if(task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
 //                                    FirebaseUser user = mAuth.getCurrentUser();
 //                                    if(user != null)
 //                                        Toast.makeText(RegisterActivity.this,"Authentication Succeeded",Toast.LENGTH_SHORT).show();
 
-                                    User user = new User(etRegEmail.getText().toString(), etRegPassword.getText().toString());
-                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                    intent.putExtra("user", user);
-                                    startActivity(intent);
-                                    finish();
+                                        User user = new User(etRegFullName.getText().toString(), etRegMobile.getText().toString() , etRegEmail.getText().toString(), etRegPassword.getText().toString());
+                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        intent.putExtra("user", user);
+                                        startActivity(intent);
+                                        finish();
 
+                                    }
                                 }
 
                                 else
@@ -68,11 +94,5 @@ public class RegisterActivity extends AppCompatActivity {
                         });
             }
         });
-
-
-
     }
-
-
-
 }

@@ -15,9 +15,6 @@ public class AuthenticationActivity extends AppCompatActivity {
     Button btnSignIn;
     ProgressBar loadingbar;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +31,6 @@ public class AuthenticationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AuthenticationActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -43,7 +39,6 @@ public class AuthenticationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AuthenticationActivity.this, LoginActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 

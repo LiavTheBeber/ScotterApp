@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "124896660581",
+    "project_id": "scotterapp-575af",
+    "storage_bucket": "scotterapp-575af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124896660581:android:ce572df7f66ee04ea3ca8c",
+        "android_client_info": {
+          "package_name": "com.example.scotterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124896660581-3mgjm7har5skjr5f6pjfr7j3eb4kqdcq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgdQ1G_eW3Z8nfu1Ja_5w05GkwYyuv9aU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124896660581-3mgjm7har5skjr5f6pjfr7j3eb4kqdcq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
