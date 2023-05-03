@@ -17,23 +17,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMaps2Binding binding;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-
-
-        binding = ActivityMaps2Binding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+    private void initMap()
+    {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
+
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        binding = ActivityMaps2Binding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used
+
+        initMap();
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
@@ -41,4 +49,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(ashkelon).title("First Scotter"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(ashkelon));
     }
+
+
+    private void moveCamera(LatLng latLng, float zoom)
+    {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
+    }
+
+
+
+
 }

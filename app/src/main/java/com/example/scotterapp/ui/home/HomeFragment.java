@@ -79,27 +79,4 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
-                // Check if GPS is enabled
-                LocationManager locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
-                boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-                if (!gpsEnabled) {
-                    // Ask the user to enable GPS
-                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    Toast.makeText(getContext(), "Please enable GPS", Toast.LENGTH_LONG).show();
-                    startActivity(intent);
-                }
-            } else {
-                // Permission denied
-                Toast.makeText(getContext(), "Location permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }
