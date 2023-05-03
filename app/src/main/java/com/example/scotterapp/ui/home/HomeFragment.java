@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
 
     // Define a request code to identify the permission request
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private Boolean mLocationPermissionGranted = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +37,9 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        //ask for location permission
+        getLocationPermission();
 
         // Get the map fragment and replace its container with the HomeFragment's container
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_fragment_container);
@@ -49,15 +53,25 @@ public class HomeFragment extends Fragment {
         // Set up the map fragment
         mapFragment.getMapAsync(new MapsActivity());
 
-        // Check for location permission
+
+        HomeViewModel homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
+        return root;
+    }
+
+
+
+    private void getLocationPermission()
+    {
         if (ContextCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Request location permission
             ActivityCompat.requestPermissions(requireActivity(),
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
-        else {
+        else
+        {
             // Check if GPS is enabled
             LocationManager locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
             boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -68,11 +82,8 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         }
-
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-        return root;
     }
+
 
     @Override
     public void onDestroyView() {
